@@ -1,5 +1,7 @@
 <h2>Ideas</h2>
 
+<%= link_to "Relationships", relationships_path %>
+
 <%= form_for Idea.new do |f| %>
   <fieldset>
     <%= f.label :name %>
@@ -16,13 +18,25 @@
     <%= f.text_field :url %>
   </fieldset>
 
+  <fieldset>
+    Invite:
+    <% current_user.people.each do |person| %>
+      <%= f.label person.id, person.name %>
+      <%= f.check_box :participations, {multiple: true, checked: true}, person.id %>
+    <% end %>
+  </fieldset>
+
   <%= f.submit %>
 <% end %>
 
-<div>
-<ul>
+<div class="ideas">
   <% @ideas.each do |idea| %>
-    <li><%= idea.inspect %></li>
+    <div class="idea">
+      <h3><%= idea.url.present? ? link_to(idea.name, idea.url) : idea.name %></h3>
+      <p><%= idea.location %></p>
+      <%= idea.participations.map(&:user_name).to_sentence %>
+      <%= button_to 'Destroy', idea_path(idea), method: :delete %>
+      <hr>
+    </div>
   <% end %>
 </div>
-</ul>

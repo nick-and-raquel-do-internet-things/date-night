@@ -1,0 +1,17 @@
+<h2>Relationships</h2>
+
+<%= link_to "Date Ideas", ideas_path %>
+
+<div>
+  <% @relationships.each do |relationship| %>
+    <%= relationship.person_a.name %> ❤️ <%= relationship.person_b.name %>
+  <% end %>
+</div>
+
+
+<%= form_tag(relationships_path) do %>
+  <%= label_tag :email %>
+  <%= email_field_tag :email %>
+
+  <%= submit_tag "Request relationship" %>
+<% end %>
