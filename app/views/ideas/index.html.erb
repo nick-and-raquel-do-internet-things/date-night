@@ -1,0 +1,28 @@
+<h2>Ideas</h2>
+
+<%= form_for Idea.new do |f| %>
+  <fieldset>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :location %>
+    <%= f.text_field :location %>
+  </fieldset>
+
+  <fieldset>
+    <%= f.label :url %>
+    <%= f.text_field :url %>
+  </fieldset>
+
+  <%= f.submit %>
+<% end %>
+
+<div>
+<ul>
+  <% @ideas.each do |idea| %>
+    <li><%= idea.inspect %></li>
+  <% end %>
+</div>
+</ul>
